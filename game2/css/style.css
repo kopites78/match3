@@ -1,0 +1,137 @@
+@font-face { font-family: ARLRDBD;	src: url("../font/ARLRDBD.TTF"); }
+
+html {
+		overflow: hidden;
+		overscroll-behavior: none;
+		font-family: ARLRDBD;
+	}
+	
+	body { margin: 0; background-color: #000000; }
+	
+	#wrapper {
+		width: 1280px; height: 720px;
+		position: relative;
+		background-color: #CC99FF;
+		/*
+		background-image: url("../images/background.png");
+		background-repeat: no-repeat;
+		background-size: cover;
+		*/
+	}
+
+#game_frame { position: absolute; top: 0; left: 0; width: 100%; height: auto; z-index: 0; visibility: visible; pointer-events: none; }
+
+#wrapper_bg {
+	width: 100%; height: auto;
+	top: 0; left: 0;
+	pointer-events: none;
+}
+
+.img_tick {
+	width: 100%; height: auto;
+	top: 0; left: 0;
+	position: absolute;
+	pointer-events: none;
+	visibility: hidden;
+}
+		
+	#images_frame {
+		width: 100%; height: auto;
+		top: 0; left: 0;
+		pointer-events: none;
+		z-index: 9999;
+		position: absolute;
+		visibility: hidden;
+	}
+	
+	::-webkit-scrollbar { width: 0px; }
+	::-webkit-scrollbar-track { opacity: 0; }
+	::-webkit-scrollbar-thumb { background: #0066cc; }
+	::-webkit-scrollbar-thumb:hover { background: #66b3ff; }
+	
+	#pic_dummy {
+		position: absolute;
+		width: 7.8%; height: 13.5%;
+		opacity: 1;
+	}
+
+	.image_wrapper {
+		position: absolute;
+		width: 7.5%; height: 13.5%;
+		opacity: 1;
+	}
+
+	.normal {
+		width: 100%; height: 100%; pointer-events: none;
+	}
+
+	.star_wrapper { position: absolute; top: 1%; left: 10%; width: 7.5%; height: 9.5%; overflow: hidden;  }
+	.star {
+		display: block; position:absolute; top:0; left: 0; height: auto; border: none;
+	}
+	
+	#timeline_star_wrapper {
+		position: absolute; top: 1%; left: 10%; width: 12%; height: 4%; overflow: hidden; border:none; visibility: hidden;
+	}
+
+	.row1 {	top: 16%; }
+	.row2 {	top: 29.4%; }
+	.row3 { top: 42.8%; }
+	.row4 { top: 56.1%; }
+	.row5 { top: 69.5%; }
+	.row6 { top: 82.9%; }
+	
+	
+	.col1 { left: 27.2%; }
+	.col2 { left: 34.7%; }
+	.col3 { left: 42.2%; }
+	.col4 { left: 49.8%; }
+	.col5 { left: 57.4%; }
+	.col6 { left: 64.9%; }
+	
+	#score_board { position: absolute; top: 0; left: 1%; width: 95%; height: 8%; padding: 5px; font-size: 2rem; }
+	#score_board img { width: 90%; height: auto; }
+	
+	#score_board table { width: 72%; height: 80%; }
+	#score_board table tr td { width: 12%; }
+
+#score_text {
+	position: absolute; top: 12%; left: 75%; font-size: 2rem;
+}
+	
+	#timeline {
+		position: absolute; width: 90%; height: 1.5%; top: 11.5%; left: 5%; border-radius: 15px; border: solid 0.8px #ffffff; overflow: hidden;
+		box-shadow: 0px 0px 6px 0px rgba(0,0,0,1);
+		-webkit-box-shadow: 0px 0px 6px 0px rgba(0,0,0,1);
+		-moz-box-shadow: 0px 0px 6px 0px rgba(0,0,0,1);
+	}
+	
+	#timebar { width: 100%; height: 100%; background-color: #0099FF; }
+	
+	#pic_dummy { top: 0; left: 0;  background-color: purple; opacity:0; z-index: 1001; }
+
+	#b_replay {
+		position: absolute; background-color: #cccccc; text-align: center;
+		font-size: 4vw; color: #000000;
+		top: 57%; cursor: pointer; visibility: hidden;
+		background-color: red; color: white; padding: 15px;
+	}
+
+	.msg_board { position: absolute; padding: 5px; top: 6%; left: 68%; width: 28%; height: 2%; background-color: #cccccc; text-align: center; font-size: 2vw; color: #000000; visibility: hidden; }
+	#console { height: 3%; top: 6%; }
+	
+	#start_scene { position: absolute; left: 0; right: 0; width: 100%; height: 100%; z-index: 1001; }
+	.start_scene_bg { width: 100%; height: auto; }
+	#b_start { position: absolute; width: 46%; height: 7.5%; left: 26.8%; top: 15%; cursor: pointer; }
+	#level_image { position: absolute; width: 60%; height: auto;  top: 0; }
+	#start_scene_instruction { position: absolute; color: #000000; font-size: 2rem; top: 63%; text-align: center; width: 100%; }
+
+
+
+	
+
+
+
+	.msg_text { width: 50%; height: auto; position: absolute; top: 0; left: 5.5%; visibility: hidden; z-index: 10001; pointer-events: none; }
+	#msg_well_done { width: 100%; height: auto; position: absolute; top: 0; left: 0; display: none; z-index: 10001; pointer-events: none; }
+	#b_next { width: 20%; height: auto; position:absolute; top: 72%; left: 50%; cursor: pointer; visibility: hidden; z-index: 10001;}

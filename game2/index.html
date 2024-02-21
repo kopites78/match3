@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0, viewport-fit=cover" />
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	<title>Match 3 Game</title>
+	<link href="css/style.css" rel="stylesheet" />
+	<script type="text/javascript" src="js/match3.js"></script>
+	<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+</head>
+	
+<style>
+	#preloader { width: 100%; height: 100%; position: absolute; left: 0; top: 0; background-color: #000000; z-index: 10000; }
+	#preloader_img { width: 10%; height: auto; position: absolute; top: 45%; left: 45%; }
+
+	#popup_wrapper {
+		visibility: hidden;
+		width: 100%; height:100%;
+		position: absolute;
+		z-index: 10000;
+	}
+	
+	.popup_image {
+		display: block;
+		visibility: hidden;
+		width: 100%;
+		height: auto;
+		position: absolute;
+		top: 0; left: 0;
+	}
+	
+	.btn {
+		width: 8%; 
+		height: 12.5%;
+		position: absolute;
+		top: 13.5%; left:78%;
+		cursor: pointer;
+		z-index: 10004;
+	}
+
+	#b_close {
+		width: 6%; height: 10%;
+		position: absolute;
+		top: 3%; left: 90%;
+		cursor: pointer;
+		z-index: 10005;
+	}
+</style>
+	
+<body>	
+	<div id="preloader">
+		<img src="images/_preloader.gif" id="preloader_img" alt="">
+	</div>
+
+	<div id="wrapper">
+		<audio src="audio/correct.mp3" id="sfx_score1" preload="auto" muted></audio>
+		<audio src="audio/mission_completed.mp3" id="mission_completed" preload="auto" muted></audio>
+		
+		<audio src="audio/remove_image.mp3" id="remove_images" preload="auto" muted></audio>
+		<audio src="audio/new_images.mp3" id="new_images" preload="auto" muted></audio>
+		<audio src="audio/hit.mp3" id="hit" preload="auto" muted></audio>
+		
+		<img src="images/no_more_move.png" alt="" class="msg_text" id="msg_no_more_move">
+		<img src="images/well_done.png" alt="" id="msg_well_done">
+		<img src="images/b_next.png" alt="" id="b_next">
+	
+		<img src="images/b_close.png" alt="" id="b_close">
+		
+		
+		
+		<div id="game_frame">
+			<img src="images/game1_bg.png" alt="" id="wrapper_bg" draggable="false">3
+			<img src="images/tick1.png" alt="" id="pic1_tick" draggable="false" class="img_tick">
+			<img src="images/tick2.png" alt="" id="pic2_tick" draggable="false" class="img_tick">
+			<img src="images/tick3.png" alt="" id="pic3_tick" draggable="false" class="img_tick">
+			<img src="images/tick4.png" alt="" id="pic4_tick" draggable="false" class="img_tick">
+			<img src="images/tick5.png" alt="" id="pic5_tick" draggable="false" class="img_tick">
+
+			<!--
+			<img src="images/pic1.png" alt="" class="image_wrapper row1 col1" id="pic1">
+			<img src="images/pic1.png" alt="" class="image_wrapper row1 col2">
+			<img src="images/pic1.png" alt="" class="image_wrapper row1 col3">
+			<img src="images/pic1.png" alt="" class="image_wrapper row1 col4">
+			<img src="images/pic1.png" alt="" class="image_wrapper row1 col5">
+			<img src="images/pic1.png" alt="" class="image_wrapper row1 col6">
+			
+			<img src="images/pic1.png" alt="" class="image_wrapper row2 col1">
+			<img src="images/pic1.png" alt="" class="image_wrapper row3 col1">
+			<img src="images/pic1.png" alt="" class="image_wrapper row4 col1">
+			<img src="images/pic1.png" alt="" class="image_wrapper row5 col1">
+			<img src="images/pic1.png" alt="" class="image_wrapper row6 col1">
+			-->
+		</div>
+
+		<img src="images/frame.png" alt="" id="images_frame" draggable="false">
+
+		<img src="images/pic0.png" alt="" id="pic_dummy" draggable="false">
+
+
+
+
+		
+		<div id="popup_wrapper">
+			<img src="images/pic1_msg.png" alt="" id="pic1_msg" class="popup_image">
+			<img src="images/pic2_msg.png" alt="" id="pic2_msg" class="popup_image">
+			<img src="images/pic3_msg.png" alt="" id="pic3_msg" class="popup_image">
+			<img src="images/pic4_msg.png" alt="" id="pic4_msg" class="popup_image">
+			<img src="images/pic5_msg.png" alt="" id="pic5_msg" class="popup_image">
+			
+			<img src="images/pic6_msg.png" alt="" id="pic6_msg" class="popup_image">
+			<img src="images/pic7_msg.png" alt="" id="pic7_msg" class="popup_image">
+			
+			<!--
+			<img src="images/pic8_msg.png" alt="" id="pic8_msg" class="popup_image">
+			<img src="images/pic9_msg.png" alt="" id="pic9_msg" class="popup_image">
+			<img src="images/pic10_msg.png" alt="" id="pic10_msg" class="popup_image">
+			-->
+
+			<div id="b_ok" class="btn" onClick="showPopupMessage()"></div>
+		</div>
+	</div>
+
+	<script>
+		window.onresize = function() {
+			makeContentResponsive();
+		}
+		
+		$(document).ready(function() {
+			var imagesLoaded = 0;
+			var images = document.querySelectorAll('img');
+			
+			for (var i = 0; i < images.length; i++) {
+				var img = new window.Image();
+				img.src = images[i].src;
+				img.onload = function() {
+					imagesLoaded++;
+					
+					if (imagesLoaded == images.length) {
+						initGame();
+						makeContentResponsive();
+						document.getElementById("preloader").remove();
+
+						document.getElementById("b_close").addEventListener("click", function (){
+							window.location = "../scene7/scene7.html";
+						});
+
+						document.getElementById("b_next").addEventListener("click", function (){
+							window.location = "../scene7/scene7.html";
+						});
+					}
+				}
+			}
+		});
+	</script>
+</body>
+</html>
